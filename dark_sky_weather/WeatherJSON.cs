@@ -16,6 +16,7 @@ namespace dark_sky_weather
     {
         public class Currently
         {
+            //Sql var ex = current_time, current_summary...etc...
             public int time { get; set; }
             public string summary { get; set; }
             public string icon { get; set; }
@@ -37,8 +38,9 @@ namespace dark_sky_weather
             public int uvIndex { get; set; }
         }
 
-        public class Datum //minutely, sql var ex = minutely_time, minutely_precipIntensity....ect... 
+        public class Datum 
         {
+            //minutely, sql var ex = minutely_time, minutely_precipIntensity....ect... 
             public int time { get; set; }
             public double precipIntensity { get; set; }
             public double precipProbability { get; set; }
@@ -53,7 +55,7 @@ namespace dark_sky_weather
             public List<Datum> data { get; set; }
         }
 
-        public class Datum2 //hourly 
+        public class Datum2 
         {
             //sql var ex = hourly_time, hourly_summary...etc... 
             public double time { get; set; }
