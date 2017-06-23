@@ -192,7 +192,116 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@hourly_precipType", hourly_precipType);
                     Insert.Parameters.AddWithValue("@hourly_summary_no_list", json_response.Hourly.summary);
 
+                    //Daily block: 
+                    string daily_time = string.Empty;
+                    string daily_summary = string.Empty;
+                    string daily_sunriseTime = string.Empty;
+                    string daily_sunsetTime = string.Empty;
+                    string daily_moonPhase = string.Empty;
+                    string daily_precipIntensity = string.Empty;
+                    string daily_precipIntensityMax = string.Empty;
+                    string daily_precipIntensityMaxTime = string.Empty;
+                    string daily_precipProbability = string.Empty;
+                    string daily_precipType = string.Empty;
+                    string daily_temperatureMin = string.Empty;
+                    string daily_temperatureMinTime = string.Empty;
+                    string daily_temperatureMax = string.Empty;
+                    string daily_temperatureMaxTime = string.Empty;
+                    string daily_apparentTemperatureMin = string.Empty;
+                    string daily_apparentTemperatureMinTime = string.Empty;
+                    string daily_apparentTemperatureMax = string.Empty;
+                    string daily_apparentTemperatureMaxTime = string.Empty;
+                    string daily_dewPoint = string.Empty;
+                    string daily_humidity = string.Empty;
+                    string daily_windSpeed = string.Empty;
+                    string daily_windGust = string.Empty;
+                    string daily_windBearing = string.Empty;
+                    string daily_visibility = string.Empty;
+                    string daily_cloudCover = string.Empty;
+                    string daily_pressure = string.Empty;
+                    string daily_ozone = string.Empty;
+                    string daily_uvIndex = string.Empty;
+                    string daily_uvIndexTime = string.Empty;
                     
+                    foreach(var day in json_response.Daily.data)
+                    {
+                        daily_time += json_response.Daily.data.time.ToString() + ", ";
+                        daily_summary += json_response.Daily.data.summary;
+                        daily_sunriseTime += json_response.Daily.data.sunriseTime.ToString() + ", ";
+                        daily_sunsetTime += json_response.Daily.data.sunsetTime.ToString() + ", ";
+                        daily_moonPhase += json_response.Daily.data.moonPhase.ToString() + ", ";
+                        daily_precipIntensity += json_response.Daily.data.precipIntensity.ToString() + ", ";
+                        daily_precipIntensityMax += json_response.Daily.data.preipIntensityMax.ToString() + ", ";
+                        daily_precipIntensityMaxTime += json_response.Daily.data.precipIntensityMaxTime.ToString() + ", ";
+                        daily_precipProbability += json_response.Daily.data.precipProbability.ToString() + ", ";
+                        daily_precipType += json_response.Daily.data.precipType + ", ";
+                        daily_temperatureMin += json_response.Daily.data.temperatureMin.ToString() + ", ";
+                        daily_temperatureMinTime += json_response.Daily.data.temperatureMinTime.ToString() + ", ";
+                        daily_temperatureMax += json_response.Daily.data.temperatureMax.ToString() + ", ";
+                        daily_temperatureMaxTime += json_response.Daily.data.temperatureMaxTime.ToString() + ", ";
+                        daily_apparentTemperatureMin += json_response.Daily.data.apparentTemperatureMin.ToString() + ", ";
+                        daily_apparentTemperatureMinTime += json_response.Daily.data.apparentTemperatureMinTime.ToString() + ", ";
+                        daily_apparentTemperatureMax += json_response.Daily.data.apparentTemperatureMax.ToString() + ", ";
+                        daily_apparentTemperatureMaxTime += json_response.Daily.data.apparentTemperatureMaxTime.ToString() + ", ";
+                        daily_dewPoint += json_response.Daily.data.dewPoint.ToString() + ", ";
+                        daily_humidity += json_response.Daily.data.humidity.ToString() + ", ";
+                        daily_windSpeed += json_response.Daily.data.windSpeed.ToString() + ", ";
+                        daily_windGust += json_response.Daily.data.windGust.ToString() + ", ";
+                        daily_windBearing += json_response.Daily.data.windBearing.ToString() + ", ";
+                        daily_visibility += json_response.Daily.data.visibility.ToString() + ", ";
+                        daily_cloudCover += json_response.Daily.data.cloudCover.ToString() + ", ";
+                        daily_pressure += json_response.Daily.data.pressure.ToString() + ", ";
+                        daily_ozone += json_response.Daily.data.ozone.ToString() + ", ";
+                        daily_uvIndex += json_response.Daily.data.uvIndex.ToString() + ", ";
+                        daily_uvIndexTime += json_response.Daily.data.uvIndexTime.ToString() + ", ";
+
+                    }
+                    Insert.Parameters.AddWithValue("@daily_time", daily_time);
+                    Insert.Parameters.AddWithValue("@daily_summary", daily_summary);
+                    Insert.Parameters.AddWithValue("@daily_sunriseTime", daily_sunriseTime);
+                    Insert.Parameters.AddWithValue("@daily_sunsetTime", daily_sunsetTime);
+                    Insert.Parameters.AddWithValue("@daily_moonPhase", daily_moonPhase);
+                    Insert.Parameters.AddWithValue("@daily_precipIntensity", daily_precipIntensity);
+                    Insert.Parameters.AddWithValue("@daily_precipIntensityMax", daily_precipIntensityMax);
+                    Insert.Parameters.AddWithValue("@daily_precipIntensityMaxTime", daily_precipIntensityMaxTime);
+                    Insert.Parameters.AddWithValue("@daily_precipProbability", daily_precipProbability);
+                    Insert.Parameters.AddWithValue("@daily_precipType", daily_precipType);
+                    Insert.Parameters.AddWithValue("@daily_temperatureMin", daily_temperatureMin);
+                    Insert.Parameters.AddWithValue("@daily_temperatureMinTime", daily_temperatureMinTime);
+                    Insert.Parameters.AddWithValue("@daily_temperatureMax", daily_temperatureMax);
+                    Insert.Parameters.AddWithValue("@daily_temperatureMaxTime", daily_temperatureMaxTime);
+                    Insert.Parameters.AddWithValue("@daily_apparentTemperatureMin", daily_apparentTemperatureMin);
+                    Insert.Parameters.AddWithValue("@daily_apparentTemperatureMinTime", daily_apparentTemperatureMinTime);
+                    Insert.Parameters.AddWithValue("@daily_apparenttemperatureMax", daily_apparentTemperatureMax);
+                    Insert.Parameters.AddWithValue("@daily_apparentTemperatureMaxTime", daily_apparentTemperatureMaxTime);
+                    Insert.Parameters.AddWithValue("@daily_dewPoint", daily_dewPoint);
+                    Insert.Parameters.AddWithValue("@daily_humidity", daily_humidity);
+                    Insert.Parameters.AddWithValue("@daily_windSpeed", daily_windSpeed);
+                    Insert.Parameters.AddWithValue("@daily_windGust", daily_windGust);
+                    Insert.Parameters.AddWithValue("@daily_windBearing", daily_windBearing);
+                    Insert.Parameters.AddWithValue("@daily_visibility", daily_visibility);
+                    Insert.Parameters.AddWithValue("@daily_cloudCover", daily_cloudCover);
+                    Insert.Parameters.AddWithValue("@daily_pressure", daily_pressure);
+                    Insert.Parameters.AddWithValue("@daily_ozone", daily_ozone);
+                    Insert.Parameters.AddWithValue("@daily_uvIndex", daily_uvIndex);
+                    Insert.Parameters.AddWithValue("@daily_uvIndexTime", daily_uvIndexTime);
+                    Insert.Parameters.AddWithValue("@daily_summary_no_list", json_response.Daily.summary);
+
+
+                    try{
+                        conn.Open();
+                        try{
+                            Insert.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }  
         }
