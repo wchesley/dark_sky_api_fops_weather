@@ -127,18 +127,18 @@ namespace dark_sky_weather
                     string minute_precipType = string.Empty; 
                     //minutely values: 
                     
-                    foreach(var minute in json_response.Minutely.data)
+                    foreach(var minute in json_response.minutely.data)
                     {
-                        minute_time += json_response.Minutely.data.time.ToString() + ", ";
-                        minute_precipIntensity += json_response.Minutely.data.precipIntensity.ToString() + ", ";
-                        minute_precipProbability += json_response.Minutely.data.precipProbability.ToString() + ", ";
-                        minute_precipType += json_response.Minutely.data.precipType + ", ";
+                        minute_time += minute.time.ToString() + ", ";
+                        minute_precipIntensity += minute.precipIntensity.ToString() + ", ";
+                        minute_precipProbability += minute.precipProbability.ToString() + ", ";
+                        minute_precipType += minute.precipType + ", ";
                     }
                     Insert.Parameters.AddWithValue("@minutely_time", minute_time);
                     Insert.Parameters.AddWithValue("@minutely_precipIntensity", minute_precipIntensity);
                     Insert.Parameters.AddWithValue("@minutely_precipProbability", minute_precipProbability);
                     Insert.Parameters.AddWithValue("@minutely_precipType", minute_precipType);
-                    Insert.Parameters.AddWithValue("@minutely_summary", json_response.Minutely.summary);
+                    Insert.Parameters.AddWithValue("@minutely_summary", json_response.minutely.summary);
 
                     //Hourly block: 
                     string hourly_time = string.Empty;
@@ -159,25 +159,25 @@ namespace dark_sky_weather
                     string hourly_uvIndex = string.Empty;
                     string hourly_precipType = string.Empty;
 
-                    foreach(var hour in json_response.Hourly.data)
+                    foreach(var hour in json_response.hourly.data)
                     {
-                        hourly_time += json_response.Hourly.data.time.ToString() + ", ";
-                        hourly_summary += json_response.Hourly.data.summary + ", ";
-                        hourly_precipIntensity += json_response.Hourly.data.precipIntensity.ToString() + ", ";
-                        hourly_precipProbability += json_response.Hourly.data.precipProbability.ToString() + ", ";
-                        hourly_temperature += json_response.Hourly.data.temperature.ToString() + ", ";
-                        hourly_apparentTemperature += json_response.Hourly.data.apparentTemperature.ToString() + ", ";
-                        hourly_dewPoint += json_response.Hourly.data.dewPoint.ToString() + ", ";
-                        hourly_humidity += json_response.Hourly.data.humidity.ToString() + ", ";
-                        hourly_windSpeed += json_response.Hourly.data.windSpeed.ToString() + ", ";
-                        hourly_windGust += json_response.Hourly.data.windGust.ToString() + ", ";
-                        hourly_windBearing += json_response.Hourly.data.windBearing.ToString() + ", ";
-                        hourly_visibility += json_response.Hourly.data.visibility.ToString() + ", ";
-                        hourly_cloudCover += json_response.Hourly.data.cloudCover.ToString() + ", ";
-                        hourly_pressure += json_response.Hourly.data.pressure.ToString() + ", ";
-                        hourly_ozone += json_response.Hourly.data.ozone.ToString() + ", ";
-                        hourly_uvIndex += json_response.Hourly.data.uvIndex.ToString() + ", ";
-                        hourly_precipType += json_response.Hourly.data.precipType + ", ";
+                        hourly_time += hour.time.ToString() + ", ";
+                        hourly_summary += hour.summary + ", ";
+                        hourly_precipIntensity += hour.precipIntensity.ToString() + ", ";
+                        hourly_precipProbability += hour.precipProbability.ToString() + ", ";
+                        hourly_temperature += hour.temperature.ToString() + ", ";
+                        hourly_apparentTemperature += hour.apparentTemperature.ToString() + ", ";
+                        hourly_dewPoint += hour.dewPoint.ToString() + ", ";
+                        hourly_humidity += hour.humidity.ToString() + ", ";
+                        hourly_windSpeed += hour.windSpeed.ToString() + ", ";
+                        hourly_windGust += hour.windGust.ToString() + ", ";
+                        hourly_windBearing += hour.windBearing.ToString() + ", ";
+                        hourly_visibility += hour.visibility.ToString() + ", ";
+                        hourly_cloudCover += hour.cloudCover.ToString() + ", ";
+                        hourly_pressure += hour.pressure.ToString() + ", ";
+                        hourly_ozone += hour.ozone.ToString() + ", ";
+                        hourly_uvIndex += hour.uvIndex.ToString() + ", ";
+                        hourly_precipType += hour.precipType + ", ";
                     }
                     Insert.Parameters.AddWithValue("@hourly_time", hourly_time);
                     Insert.Parameters.AddWithValue("@hourly_summary", hourly_summary);
@@ -196,7 +196,7 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@hourly_ozone", hourly_ozone);
                     Insert.Parameters.AddWithValue("@hourly_uvIndex", hourly_uvIndex);
                     Insert.Parameters.AddWithValue("@hourly_precipType", hourly_precipType);
-                    Insert.Parameters.AddWithValue("@hourly_summary_no_list", json_response.Hourly.summary);
+                    Insert.Parameters.AddWithValue("@hourly_summary_no_list", json_response.hourly.summary);
 
                     //Daily block: 
                     string daily_time = string.Empty;
@@ -229,37 +229,37 @@ namespace dark_sky_weather
                     string daily_uvIndex = string.Empty;
                     string daily_uvIndexTime = string.Empty;
                     
-                    foreach(var day in json_response.Daily.data)
+                    foreach(var day in json_response.daily.data)
                     {
-                        daily_time += json_response.Daily.data.time.ToString() + ", ";
-                        daily_summary += json_response.Daily.data.summary;
-                        daily_sunriseTime += json_response.Daily.data.sunriseTime.ToString() + ", ";
-                        daily_sunsetTime += json_response.Daily.data.sunsetTime.ToString() + ", ";
-                        daily_moonPhase += json_response.Daily.data.moonPhase.ToString() + ", ";
-                        daily_precipIntensity += json_response.Daily.data.precipIntensity.ToString() + ", ";
-                        daily_precipIntensityMax += json_response.Daily.data.preipIntensityMax.ToString() + ", ";
-                        daily_precipIntensityMaxTime += json_response.Daily.data.precipIntensityMaxTime.ToString() + ", ";
-                        daily_precipProbability += json_response.Daily.data.precipProbability.ToString() + ", ";
-                        daily_precipType += json_response.Daily.data.precipType + ", ";
-                        daily_temperatureMin += json_response.Daily.data.temperatureMin.ToString() + ", ";
-                        daily_temperatureMinTime += json_response.Daily.data.temperatureMinTime.ToString() + ", ";
-                        daily_temperatureMax += json_response.Daily.data.temperatureMax.ToString() + ", ";
-                        daily_temperatureMaxTime += json_response.Daily.data.temperatureMaxTime.ToString() + ", ";
-                        daily_apparentTemperatureMin += json_response.Daily.data.apparentTemperatureMin.ToString() + ", ";
-                        daily_apparentTemperatureMinTime += json_response.Daily.data.apparentTemperatureMinTime.ToString() + ", ";
-                        daily_apparentTemperatureMax += json_response.Daily.data.apparentTemperatureMax.ToString() + ", ";
-                        daily_apparentTemperatureMaxTime += json_response.Daily.data.apparentTemperatureMaxTime.ToString() + ", ";
-                        daily_dewPoint += json_response.Daily.data.dewPoint.ToString() + ", ";
-                        daily_humidity += json_response.Daily.data.humidity.ToString() + ", ";
-                        daily_windSpeed += json_response.Daily.data.windSpeed.ToString() + ", ";
-                        daily_windGust += json_response.Daily.data.windGust.ToString() + ", ";
-                        daily_windBearing += json_response.Daily.data.windBearing.ToString() + ", ";
-                        daily_visibility += json_response.Daily.data.visibility.ToString() + ", ";
-                        daily_cloudCover += json_response.Daily.data.cloudCover.ToString() + ", ";
-                        daily_pressure += json_response.Daily.data.pressure.ToString() + ", ";
-                        daily_ozone += json_response.Daily.data.ozone.ToString() + ", ";
-                        daily_uvIndex += json_response.Daily.data.uvIndex.ToString() + ", ";
-                        daily_uvIndexTime += json_response.Daily.data.uvIndexTime.ToString() + ", ";
+                        daily_time += day.time.ToString() + ", ";
+                        daily_summary += day.summary;
+                        daily_sunriseTime += day.sunriseTime.ToString() + ", ";
+                        daily_sunsetTime += day.sunsetTime.ToString() + ", ";
+                        daily_moonPhase += day.moonPhase.ToString() + ", ";
+                        daily_precipIntensity += day.precipIntensity.ToString() + ", ";
+                        daily_precipIntensityMax += day.precipIntensityMax.ToString() + ", ";
+                        daily_precipIntensityMaxTime += day.precipIntensityMaxTime.ToString() + ", ";
+                        daily_precipProbability += day.precipProbability.ToString() + ", ";
+                        daily_precipType += day.precipType + ", ";
+                        daily_temperatureMin += day.temperatureMin.ToString() + ", ";
+                        daily_temperatureMinTime += day.temperatureMinTime.ToString() + ", ";
+                        daily_temperatureMax += day.temperatureMax.ToString() + ", ";
+                        daily_temperatureMaxTime += day.temperatureMaxTime.ToString() + ", ";
+                        daily_apparentTemperatureMin += day.apparentTemperatureMin.ToString() + ", ";
+                        daily_apparentTemperatureMinTime += day.apparentTemperatureMinTime.ToString() + ", ";
+                        daily_apparentTemperatureMax += day.apparentTemperatureMax.ToString() + ", ";
+                        daily_apparentTemperatureMaxTime += day.apparentTemperatureMaxTime.ToString() + ", ";
+                        daily_dewPoint += day.dewPoint.ToString() + ", ";
+                        daily_humidity += day.humidity.ToString() + ", ";
+                        daily_windSpeed += day.windSpeed.ToString() + ", ";
+                        daily_windGust += day.windGust.ToString() + ", ";
+                        daily_windBearing += day.windBearing.ToString() + ", ";
+                        daily_visibility += day.visibility.ToString() + ", ";
+                        daily_cloudCover += day.cloudCover.ToString() + ", ";
+                        daily_pressure += day.pressure.ToString() + ", ";
+                        daily_ozone += day.ozone.ToString() + ", ";
+                        daily_uvIndex += day.uvIndex.ToString() + ", ";
+                        daily_uvIndexTime += day.uvIndexTime.ToString() + ", ";
 
                     }
                     Insert.Parameters.AddWithValue("@daily_time", daily_time);
@@ -291,7 +291,7 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@daily_ozone", daily_ozone);
                     Insert.Parameters.AddWithValue("@daily_uvIndex", daily_uvIndex);
                     Insert.Parameters.AddWithValue("@daily_uvIndexTime", daily_uvIndexTime);
-                    Insert.Parameters.AddWithValue("@daily_summary_no_list", json_response.Daily.summary);
+                    Insert.Parameters.AddWithValue("@daily_summary_no_list", json_response.daily.summary);
 
 
                     try{
