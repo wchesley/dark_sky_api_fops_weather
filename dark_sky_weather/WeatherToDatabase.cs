@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Newtonsoft.Json; 
 
+/* 
+Written By: Walker Chesley
+Date: 06/22/2017
+ */
+
 namespace dark_sky_weather
 {
     public class WeatherToDatabase
     {
+        //TODO: setup database table and test! 
         static void SaveWeather(string raw_json_response, string city)
         {
             //class will take raw response as string from dark sky
@@ -178,7 +184,7 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@hourly_precipIntensity", hourly_precipIntensity);
                     Insert.Parameters.AddWithValue("@hourly_precipProbability", hourly_precipProbability);
                     Insert.Parameters.AddWithValue("@hourly_temperature", hourly_temperature);
-                    Insert.Parameters.AddWithValue("@hourly_apparentTemperature", hourly_apparentTemperature;
+                    Insert.Parameters.AddWithValue("@hourly_apparentTemperature", hourly_apparentTemperature);
                     Insert.Parameters.AddWithValue("@hourly_dewPoint", hourly_dewPoint);
                     Insert.Parameters.AddWithValue("@hourly_humidity", hourly_humidity);
                     Insert.Parameters.AddWithValue("@hourly_windSpeed", hourly_windSpeed);
