@@ -18,6 +18,7 @@ namespace dark_sky_weather
             
             string file_location;
             //file location, currenlty in bin/debug. 
+            //will need to determine permanet file path on server. 
             string file = "dark_sky_weather_config.json";
             
             //Read file and deserialize json_config into JSON_Config class. 
