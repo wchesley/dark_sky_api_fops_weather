@@ -160,20 +160,21 @@ namespace dark_sky_weather
         public Flags flags { get; set; }
 
             //should get everything in the currently class and add it to one dictionary. 
-            public Dictionary<string, string> WeatherDict()
+            public IDictionary<string, string> WeatherDict()
             {
-                Currently currentdict = new Currently(); 
+                Currently currentdict = new Currently();
                 PropertyInfo[] info = currentdict.GetType().GetProperties();
+
                 Dictionary<string, string> dict = new Dictionary<string, string>();
-                foreach(var i in info)
+                foreach(PropertyInfo i in info)
                 {
-                    dict.Add(i.Name, i.GetValue(info, null).ToString());
+                   dict.Add(i.Name, i.GetValue(currentdict).ToString());  
                 }
                 foreach(var key in dict.Keys)
                 {
                     Console.WriteLine($"NamerProperty: {key}, value: {dict[key]}");
                 }
-                return dict; 
+                return dict;   
                 /*
                  * Alt Theory: harder to read but should provide the same results as WeatherDict();
                  * currently.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
