@@ -42,6 +42,10 @@ namespace dark_sky_weather
                     Console.WriteLine(weather_response.currently.temperature.ToString() + "F");
                     Console.WriteLine(weather_response.longitude.ToString());
                     Console.WriteLine(weather_response.latitude.ToString());
+                    WeatherJSON.RootObject someObj = new WeatherJSON.RootObject();
+                    var somestring = someObj.WeatherDict();
+                    Console.WriteLine(somestring.ToString());
+                    Console.ReadKey(); 
                 }
             }
         }

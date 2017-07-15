@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
+
 
 /* 
 Written By: Walker Chesley
@@ -23,7 +24,7 @@ namespace dark_sky_weather
             //saves all variables to Database.
             //selects table based on city chosen. 
             var json_response = JsonConvert.DeserializeObject<WeatherJSON.RootObject>(raw_json_response);
-            string sql_connection = "server location";
+            string sql_connection = "server conn string. "; 
             string table_name = city;
             string sql_query;
             using (SqlConnection conn = new SqlConnection(sql_connection))
@@ -50,7 +51,7 @@ namespace dark_sky_weather
                 sql_query += "hourly_temperature, hourly_apparentTemperature, hourly_dewPoint, ";
                 sql_query += "hourly_humidity, hourly_windSpeed, hourly_windGust, hourly_windBearing, ";
                 sql_query += "hourly_visibility, hourly_cloudCover, hourly_pressure, hourly_ozone, hourly_uvIndex, ";
-                sql_query += "hourly_precipType, hourly_summary, ";
+                sql_query += "hourly_precipType, ";
                 //End of hourly Values from Dark Sky response
 
                 sql_query += "daily_time, daily_summary, daily_sunriseTime, daily_sunsetTime, daily_moonPhase, ";
