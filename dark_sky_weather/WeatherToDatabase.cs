@@ -25,10 +25,10 @@ namespace dark_sky_weather
             var json_response = JsonConvert.DeserializeObject<WeatherJSON.RootObject>(raw_json_response);
             string sql_connection = "server location";
             string table_name = city;
-            string sql_query;
+            string sql_query = string.Empty(); 
             using (SqlConnection conn = new SqlConnection(sql_connection))
             {
-                conn.ConnectionString = sql_connection; 
+                //conn.ConnectionString = sql_connection; extra, declared in using statement. 
                 // there are several lists in the response from Dark Sky, will need for loops
                 //to iterate over all of em to insert data. 
                 //will grab current weather, minutly, hourly, daily and any alerts. 
@@ -40,18 +40,18 @@ namespace dark_sky_weather
                 sql_query += "current_ozone, current_uvIndex, ";
                 //end current class from Dark Sky class.
                  
-                //End of Current Values from Dark Sky response
+                
 
                 sql_query += "minutely_time, minutely_precipIntensity, minutely_precipProbability, mintely_precipType, ";
                 sql_query += "minutely_summary, ";
-                //End of Minutely Values from Dark Sky response
+                //End of Minutely class from Dark Sky response
 
                 sql_query += "hourly_time, hourly_summary, hourly_precipIntensity, hourly_precipProbability, ";
                 sql_query += "hourly_temperature, hourly_apparentTemperature, hourly_dewPoint, ";
                 sql_query += "hourly_humidity, hourly_windSpeed, hourly_windGust, hourly_windBearing, ";
                 sql_query += "hourly_visibility, hourly_cloudCover, hourly_pressure, hourly_ozone, hourly_uvIndex, ";
-                sql_query += "hourly_precipType, hourly_summary, ";
-                //End of hourly Values from Dark Sky response
+                sql_query += "hourly_precipType, hourly_summary_no_list, ";
+                //End of hourly class from Dark Sky response
 
                 sql_query += "daily_time, daily_summary, daily_sunriseTime, daily_sunsetTime, daily_moonPhase, ";
                 sql_query += "daily_precipIntensity, daily_precipIntensityMax, daily_precipIntensityMaxTime, ";
@@ -61,7 +61,7 @@ namespace dark_sky_weather
                 sql_query += "daily_apparentTemperatureMaxTime, daily_dewPoint, daily_humidity, daily_windSpeed, ";
                 sql_query += "daily_windGust, daily_windBearing, daily_visibility, daily_cloudCover, daily_pressure, ";
                 sql_query += "daily_ozone, daily_uvIndex, daily_uvIndexTime, daily_summary_no_list) ";
-                //End Daily values from dark sky response
+                //End Daily class from dark sky response
 
                 //begin Values: 
                 sql_query += "VALUES(";
