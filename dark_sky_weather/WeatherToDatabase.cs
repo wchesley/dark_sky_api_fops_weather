@@ -16,15 +16,15 @@ namespace dark_sky_weather
     public class WeatherToDatabase
     {
         //TODO: setup database table and test! 
-        static void SaveWeather(string raw_json_response, string city)
+        public static void SaveWeather(string raw_json_response, string city)
         {
             //class will take raw response as string from dark sky
             //deserialize to WeatherJSON class 
             //saves all variables to Database.
             //selects table based on city chosen. 
             var json_response = JsonConvert.DeserializeObject<WeatherJSON.RootObject>(raw_json_response);
-            string sql_connection = "server location";
-            string table_name = city;
+            string sql_connection = "Data Source=localhost;Initial Catalog=FOPS Weather;Integrated Security=SSPI;";
+            
             string sql_query;
             using (SqlConnection conn = new SqlConnection(sql_connection))
             {
@@ -32,7 +32,7 @@ namespace dark_sky_weather
                 // there are several lists in the response from Dark Sky, will need for loops
                 //to iterate over all of em to insert data. 
                 //will grab current weather, minutly, hourly, daily and any alerts. 
-                sql_query = $"INSERT INTO {table_name}(";
+                sql_query = $"INSERT INTO {city}(";
                 sql_query += "current_time, current_summary, current_nearestStormDistance, current_nearestStormBearing, ";
                 sql_query += "current_precipIntensity, current_precipProbability, current_temperature, ";
                 sql_query += "current_apparentTemperature, current_dewPoint, current_humidity, current_windSpeed, ";
@@ -98,7 +98,7 @@ namespace dark_sky_weather
                 {
                     //params outside of lists
                     
-                    //current values: 
+                    //current weather values: 
                     Insert.Parameters.AddWithValue("@current_time", json_response.currently.time);
                     Insert.Parameters.AddWithValue("@current_summary", json_response.currently.summary);
                     Insert.Parameters.AddWithValue("@current_nearestStormDistance", json_response.currently.nearestStormDistance);
@@ -119,13 +119,13 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@current_uvIndex", json_response.currently.uvIndex);
 
 
-                    //cannot store list in SQL, will concantinate strings
+                    //cannot store list in SQL, will bypass by concantinating strings
                     //together to store all values.
                     string minute_time = string.Empty; 
                     string minute_precipIntensity = string.Empty;
                     string minute_precipProbability = string.Empty;
                     string minute_precipType = string.Empty; 
-                    //minutely values: 
+                    //minutely weather values: 
                     
                     foreach(var minute in json_response.minutely.data)
                     {
@@ -140,7 +140,7 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@minutely_precipType", minute_precipType);
                     Insert.Parameters.AddWithValue("@minutely_summary", json_response.minutely.summary);
 
-                    //Hourly block: 
+                    //Hourly weather block: 
                     string hourly_time = string.Empty;
                     string hourly_summary = string.Empty;
                     string hourly_precipIntensity = string.Empty;
@@ -198,7 +198,7 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@hourly_precipType", hourly_precipType);
                     Insert.Parameters.AddWithValue("@hourly_summary_no_list", json_response.hourly.summary);
 
-                    //Daily block: 
+                    //Daily weather block: 
                     string daily_time = string.Empty;
                     string daily_summary = string.Empty;
                     string daily_sunriseTime = string.Empty;
@@ -294,22 +294,17 @@ namespace dark_sky_weather
                     Insert.Parameters.AddWithValue("@daily_summary_no_list", json_response.daily.summary);
 
 
-                    try{
+                    
                         conn.Open();
                         try{
                             Insert.ExecuteNonQuery();
                         }
-                        catch
+                        catch(Exception e)
                         {
-
+                            Console.WriteLine(e.ToString());
                         }
-                    }
-                    catch
-                    {
-
-                    }
-                }
-            }  
+                }  //end Insert
+            }  //end Conn
         }
     }
 }

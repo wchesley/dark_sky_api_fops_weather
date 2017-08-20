@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace dark_sky_weather
 {
+    //Helper class to pull relevant data from .json config file
+    //entitled: 'dark_sky_weather_config.json'
     class JSON_Config
     {
         public class City

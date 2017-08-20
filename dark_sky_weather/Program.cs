@@ -11,6 +11,10 @@ namespace dark_sky_weather
 {
     class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             //variable to deserialize json_config file. 
@@ -39,12 +43,11 @@ namespace dark_sky_weather
                     var result = client.DownloadString(apiAddr);
                     Console.WriteLine(result.ToString());
                     var weather_response = JsonConvert.DeserializeObject<WeatherJSON.RootObject>(result);
-                    Console.WriteLine($"Results for: {city_name}, {location}, URL: {api}");
-                    Console.WriteLine(weather_response.currently.temperature.ToString() + "F");
-                    Console.WriteLine(weather_response.longitude.ToString());
-                    Console.WriteLine(weather_response.latitude.ToString());
+                    //Save weather to database, as of 8/20/2017 there is no DB connected to this statement
+                    //WeatherToDatabase.SaveWeather(result, item.ToString()); 
                 }
             }
+            Console.ReadKey();
         }
     }
 }
